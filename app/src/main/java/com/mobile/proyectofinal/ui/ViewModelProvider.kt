@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.mobile.proyectofinal.NewsApplication
+import com.mobile.proyectofinal.viewmodel.FavouritesViewModel
 import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
 
 object ViewModelProvider {
@@ -14,6 +15,9 @@ object ViewModelProvider {
             HomeNewsViewModel(NewsApplication().container.newsRepository)
         }
 
+        initializer {
+            FavouritesViewModel(NewsApplication().container.newsRepository)
+        }
 
     }
 }

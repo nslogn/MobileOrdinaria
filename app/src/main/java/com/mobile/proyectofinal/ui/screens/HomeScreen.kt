@@ -1,6 +1,5 @@
 package com.mobile.proyectofinal.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -53,14 +52,13 @@ import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
 import kotlinx.coroutines.launch
 
 @Preview(showBackground = true)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
     viewModel: HomeNewsViewModel = viewModel(factory = ViewModelProvider.Factory)
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar() },
+        topBar = { TopBarWithMenu() },
     ) { innerPadding ->
         val newsList by viewModel.getNews("US", 100).observeAsState(initial = emptyList())
         HomeContent(
@@ -73,7 +71,7 @@ fun HomeScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+fun TopBarWithMenu() {
     CenterAlignedTopAppBar(
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
