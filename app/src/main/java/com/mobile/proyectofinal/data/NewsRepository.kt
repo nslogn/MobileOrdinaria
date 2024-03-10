@@ -1,9 +1,8 @@
-package com.mobile.proyectofinal.model
+package com.mobile.proyectofinal.data
 
-import com.mobile.proyectofinal.model.db.NewsDao
-import com.mobile.proyectofinal.model.enitty.News
-import com.mobile.proyectofinal.model.network.RetrofitInstance
-import kotlinx.coroutines.flow.Flow
+import com.mobile.proyectofinal.data.db.NewsDao
+import com.mobile.proyectofinal.data.enitty.News
+import com.mobile.proyectofinal.data.network.RetrofitInstance
 
 class NewsRepository(
     private val newsDao: NewsDao

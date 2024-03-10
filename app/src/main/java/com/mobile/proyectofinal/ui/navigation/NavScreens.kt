@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.view
+package com.mobile.proyectofinal.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite

@@ -1,13 +1,13 @@
-package com.mobile.proyectofinal.view
+package com.mobile.proyectofinal.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.mobile.proyectofinal.view.screens.FavouritesScreen
-import com.mobile.proyectofinal.view.screens.HomeScreen
-import com.mobile.proyectofinal.view.screens.NewsScreen
-import com.mobile.proyectofinal.view.screens.SearchScreen
+import com.mobile.proyectofinal.ui.screens.FavouritesScreen
+import com.mobile.proyectofinal.ui.screens.HomeScreen
+import com.mobile.proyectofinal.ui.screens.NewsScreen
+import com.mobile.proyectofinal.ui.screens.SearchScreen
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {

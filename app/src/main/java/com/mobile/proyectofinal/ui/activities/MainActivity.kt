@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.view.activities
+package com.mobile.proyectofinal.ui.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.mobile.proyectofinal.view.MainScreen
-import com.mobile.proyectofinal.view.theme.ProyectoFinalTheme
+import com.mobile.proyectofinal.ui.MainScreen
+import com.mobile.proyectofinal.ui.theme.ProyectoFinalTheme
 
 class MainActivity : ComponentActivity() {
 

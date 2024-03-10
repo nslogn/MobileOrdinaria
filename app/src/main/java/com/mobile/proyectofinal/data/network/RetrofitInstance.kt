@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.model.network
+package com.mobile.proyectofinal.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

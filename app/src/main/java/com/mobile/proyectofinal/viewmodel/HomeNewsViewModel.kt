@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mobile.proyectofinal.model.NewsRepository
-import com.mobile.proyectofinal.model.enitty.News
+import com.mobile.proyectofinal.data.NewsRepository
+import com.mobile.proyectofinal.data.enitty.News
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.view
+package com.mobile.proyectofinal.ui
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras

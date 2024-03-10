@@ -1,6 +1,4 @@
-package com.mobile.proyectofinal.model.enitty
-
-import com.mobile.proyectofinal.model.enitty.News
+package com.mobile.proyectofinal.data.enitty
 
 class NewsResponse {
     val status: String? = null

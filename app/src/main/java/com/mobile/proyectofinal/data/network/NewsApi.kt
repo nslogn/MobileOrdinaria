@@ -1,6 +1,6 @@
-package com.mobile.proyectofinal.model.network
+package com.mobile.proyectofinal.data.network
 
-import com.mobile.proyectofinal.model.enitty.NewsResponse
+import com.mobile.proyectofinal.data.enitty.NewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

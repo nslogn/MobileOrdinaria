@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.view.theme
+package com.mobile.proyectofinal.ui.theme
 
 import android.app.Activity
 import android.os.Build

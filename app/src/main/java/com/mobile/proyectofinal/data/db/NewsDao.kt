@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.model.db
+package com.mobile.proyectofinal.data.db
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.mobile.proyectofinal.model.enitty.News
+import com.mobile.proyectofinal.data.enitty.News
 import kotlinx.coroutines.flow.Flow
 
 @Dao

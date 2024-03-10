@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.view.screens
+package com.mobile.proyectofinal.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

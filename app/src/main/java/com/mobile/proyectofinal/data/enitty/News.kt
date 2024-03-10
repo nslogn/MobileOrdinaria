@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.model.enitty
+package com.mobile.proyectofinal.data.enitty
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

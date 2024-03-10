@@ -1,10 +1,10 @@
-package com.mobile.proyectofinal.model.db
+package com.mobile.proyectofinal.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mobile.proyectofinal.model.enitty.News
+import com.mobile.proyectofinal.data.enitty.News
 
 @Database(
     entities = [News::class],

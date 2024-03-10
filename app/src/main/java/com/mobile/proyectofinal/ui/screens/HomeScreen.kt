@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.view.screens
+package com.mobile.proyectofinal.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mobile.proyectofinal.R
-import com.mobile.proyectofinal.model.enitty.News
+import com.mobile.proyectofinal.data.enitty.News
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 
@@ -48,7 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 import coil.compose.AsyncImage
-import com.mobile.proyectofinal.view.ViewModelProvider
+import com.mobile.proyectofinal.ui.ViewModelProvider
 import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
 import kotlinx.coroutines.launch
 

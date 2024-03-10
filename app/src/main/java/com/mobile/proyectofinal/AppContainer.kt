@@ -1,8 +1,8 @@
 package com.mobile.proyectofinal
 
 import android.content.Context
-import com.mobile.proyectofinal.model.NewsRepository
-import com.mobile.proyectofinal.model.db.NewsDatabase
+import com.mobile.proyectofinal.data.NewsRepository
+import com.mobile.proyectofinal.data.db.NewsDatabase
 
 interface AppContainer {
     val newsRepository: NewsRepository
