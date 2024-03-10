@@ -29,4 +29,15 @@
         </activity>
     </application>
 
+    <!-- Add queries declaration -->
+    <queries>
+        <!-- Allow interaction with Gmail -->
+        <package android:name="com.google.android.gm" />
+        <!-- Allow interaction with Outlook -->
+        <package android:name="com.microsoft.office.outlook" />
+        <!-- Allow interaction with the default Email app -->
+        <package android:name="com.android.email" />
+
+    </queries>
+
 </manifest>

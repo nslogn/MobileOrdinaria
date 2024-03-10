@@ -47,14 +47,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 import coil.compose.AsyncImage
-import com.mobile.proyectofinal.ui.ViewModelProvider
+import com.mobile.proyectofinal.AppViewModelProvider
 import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
 import kotlinx.coroutines.launch
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreen(
-    viewModel: HomeNewsViewModel = viewModel(factory = ViewModelProvider.Factory)
+    viewModel: HomeNewsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -67,38 +67,6 @@ fun HomeScreen(
             viewModel
         )
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopBarWithMenu() {
-    CenterAlignedTopAppBar(
-        colors = topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),
-        title = {
-            Image(
-                painter = painterResource(id = R.drawable.top_bar_font),
-                contentDescription = "Local Image/Title/Dodgers Font",
-                modifier = Modifier.size(180.dp)
-            )
-        },
-        navigationIcon = {
-            IconButton(
-                onClick = { /* do something */ }
-            ) {
-                Icon(Icons.Filled.Menu, contentDescription = "Localized description")
-            }
-        },
-        actions = {
-            IconButton(
-                onClick = { /* do something */ }
-            ) {
-                Icon(Icons.Filled.Settings, contentDescription = "Localized description")
-            }
-        }
-    )
 }
 
 @Composable
@@ -190,6 +158,38 @@ fun NewsTitle(news: News) {
         )
     )
 
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBarWithMenu() {
+    CenterAlignedTopAppBar(
+        colors = topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.primary,
+        ),
+        title = {
+            Image(
+                painter = painterResource(id = R.drawable.top_bar_font),
+                contentDescription = "Local Image/Title/Dodgers Font",
+                modifier = Modifier.size(180.dp)
+            )
+        },
+        navigationIcon = {
+            IconButton(
+                onClick = { /* do something */ }
+            ) {
+                Icon(Icons.Filled.Menu, contentDescription = "Localized description")
+            }
+        },
+        actions = {
+            IconButton(
+                onClick = { /* do something */ }
+            ) {
+                Icon(Icons.Filled.Settings, contentDescription = "Localized description")
+            }
+        }
+    )
 }
 
 @Preview(showBackground = true)

@@ -1,0 +1,18 @@
+7747-7987  e.proyectofinal         com.mobile.proyectofinal             E  Attempt to load writable dex file: /data/local/tmp/perfd/perfa_okhttp.dex
+2024-03-10 20:12:44.822  7747-7987  StudioProfiler          com.mobile.proyectofinal             E  Studio Profilers encountered an unexpected error. Consider reporting a bug, including logcat output below.
+                                                                                                    See also: https://developer.android.com/studio/report-bugs.html#studio-bugs
+
+                                                                                                    Could not insert an OkHttp3 profiler interceptor
+                                                                                                    java.lang.ClassNotFoundException: Didn't find class "com.android.tools.profiler.agent.okhttp.OkHttp3Interceptor" on path: DexPathList[[zip file "/data/app/~~1Edcfwg8jLg14GtP36ok7Q==/com.mobile.proyectofinal-Fi3T2vUbL8ZLIBNWCWkuhg==/base.apk"],nativeLibraryDirectories=[/data/app/~~1Edcfwg8jLg14GtP36ok7Q==/com.mobile.proyectofinal-Fi3T2vUbL8ZLIBNWCWkuhg==/lib/arm64, /system/lib64, /system_ext/lib64]]
+                                                                                                    	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:259)
+                                                                                                    	at java.lang.ClassLoader.loadClass(ClassLoader.java:379)
+                                                                                                    	at java.lang.ClassLoader.loadClass(ClassLoader.java:312)
+                                                                                                    	at com.android.tools.profiler.support.network.okhttp.OkHttp3Wrapper.insertInterceptor(OkHttp3Wrapper.java:89)
+                                                                                                    	at okhttp3.OkHttpClient.networkInterceptors(OkHttpClient.kt:142)
+                                                                                                    	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:184)
+                                                                                                    	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)
+                                                                                                    	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+                                                                                                    	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+                                                                                                    	at java.lang.Thread.run(Thread.java:1012)
+2024-03-10 20:12:44.840  7747-7987  TrafficStats            com.mobile.proyectofinal             D  tagSocket(101) with statsTag=0xffffffff, statsUid=-1
+2024-03-10 20:12:44.890  7747-7991  e.proyectofinal         com.mobile.proyectofinal             E  Attempt to load writable dex file: /data/local/tmp/perfd/perfa_okhttp.dex

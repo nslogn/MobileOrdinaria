@@ -1,5 +1,9 @@
 package com.mobile.proyectofinal.ui.screens
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,13 +36,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.mobile.proyectofinal.R
 import com.mobile.proyectofinal.data.enitty.News
-import com.mobile.proyectofinal.ui.ViewModelProvider
+import com.mobile.proyectofinal.AppViewModelProvider
 import com.mobile.proyectofinal.viewmodel.FavouritesViewModel
 
 @Composable
 fun FavouritesScreen(
-    viewModel: FavouritesViewModel = viewModel(factory = ViewModelProvider.Factory)
+    viewModel: FavouritesViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { TopBar() },
@@ -63,13 +69,15 @@ fun FavouritesContent(innerPadding: PaddingValues, favouriteNews: List<News>) {
 
 @Composable
 fun FavouritesNewsItem(news: News) {
+    val context = LocalContext.current
+
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                //navController.navigate("${Destinations.DETAILS_SCREEN}/${new.title}")
+                composeEmail(context, news.title, news.url)
             },
     ) {
         Box(
@@ -91,6 +99,19 @@ fun FavouritesNewsItem(news: News) {
             )
             NewsTitle(news)
         }
+    }
+}
+
+fun composeEmail(context: Context, subject: String, url: String) {
+    val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:") // Only email apps handle this.
+        putExtra(Intent.EXTRA_SUBJECT, subject)
+        putExtra(Intent.EXTRA_TEXT, url)
+    }
+    if (emailIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(emailIntent)
+    } else {
+        Toast.makeText(context, "No email app found", Toast.LENGTH_SHORT).show()
     }
 }
 
