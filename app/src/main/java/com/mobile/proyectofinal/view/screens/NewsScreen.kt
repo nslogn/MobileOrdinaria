@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.composables.screens.navScreens
+package com.mobile.proyectofinal.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package com.mobile.proyectofinal.composables.screens
+package com.mobile.proyectofinal.view
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -14,10 +14,10 @@ import androidx.navigation.NavHostController
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val screens = listOf(
-        NavScreen.HomeScreen,
-        NavScreen.FavouritesScreen,
-        NavScreen.SearchScreen,
-        NavScreen.NewsScreen
+        NavScreens.HomeScreens,
+        NavScreens.FavouritesScreens,
+        NavScreens.SearchScreens,
+        NavScreens.NewsScreens
     )
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
 

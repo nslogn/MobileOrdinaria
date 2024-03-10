@@ -1,8 +1,9 @@
-package com.mobile.proyectofinal.composables.screens.navScreens
+package com.mobile.proyectofinal.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +18,7 @@ fun FavouritesScreen() {
             .background(Color.Red),
         contentAlignment = Alignment.Center
     ) {
-
+        Text(text = "Hello")
     }
 }
 

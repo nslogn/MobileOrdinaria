@@ -1,11 +1,11 @@
-package com.mobile.proyectofinal.network
+package com.mobile.proyectofinal.model.network
 
-import com.mobile.proyectofinal.model.NewsResponse
+import com.mobile.proyectofinal.model.enitty.NewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val API_KEY = "fe050c83e88a4c9d93e6bff7842a1da1"
+private const val API_KEY = "43d3747c579347069f2e1f953fe2183e"
 
 
 interface NewsApi {

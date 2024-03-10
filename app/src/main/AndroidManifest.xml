@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     
     <application
+        android:name=".NewsApplication"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,7 +17,7 @@
         android:theme="@style/Theme.ProyectoFinal"
         tools:targetApi="31">
         <activity
-            android:name=".composables.screens.activities.MainActivity"
+            android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ProyectoFinal">
             <intent-filter>
