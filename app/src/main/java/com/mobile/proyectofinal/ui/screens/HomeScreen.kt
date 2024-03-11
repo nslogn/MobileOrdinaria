@@ -51,10 +51,10 @@ import com.mobile.proyectofinal.AppViewModelProvider
 import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
 import kotlinx.coroutines.launch
 
-@Preview(showBackground = true)
 @Composable
 fun HomeScreen(
-    viewModel: HomeNewsViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: HomeNewsViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    navigateToNews: (String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -64,7 +64,8 @@ fun HomeScreen(
         HomeContent(
             innerPadding,
             newsList,
-            viewModel
+            viewModel,
+            navigateToNews
         )
     }
 }
@@ -73,7 +74,8 @@ fun HomeScreen(
 fun HomeContent(
     innerPadding: PaddingValues,
     news: List<News>,
-    viewModel: HomeNewsViewModel
+    viewModel: HomeNewsViewModel,
+    navigateToNews: (String) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -92,21 +94,27 @@ fun HomeContent(
                         coroutineScope.launch {
                             viewModel.insertFavouriteNew(newsItem)
                         }
-                    })
+                    },
+                    navigateToNews
+                )
             }
         }
     }
 }
 
 @Composable
-fun NewsItem(newsItem: News, onFavouritesClick: () -> Unit) {
+fun NewsItem(
+    newsItem: News,
+    onFavouritesClick: () -> Unit,
+    navigateToNews: (String) -> Unit
+) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                //navController.navigate("${Destinations.DETAILS_SCREEN}/${new.title}")
+                navigateToNews(newsItem.url)
             },
     ) {
         Box(
@@ -206,6 +214,7 @@ fun CardContentPreview() {
         newsItem = News(
             1, "Home", "Content", "yo", "no", "none"
         ),
-        onFavouritesClick = {}
+        onFavouritesClick = {},
+        navigateToNews = {}
     )
 }

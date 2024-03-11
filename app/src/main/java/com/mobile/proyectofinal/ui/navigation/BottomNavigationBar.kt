@@ -17,7 +17,6 @@ fun BottomNavigationBar(navController: NavHostController) {
         NavScreens.HomeScreens,
         NavScreens.FavouritesScreens,
         NavScreens.SearchScreens,
-        NavScreens.NewsScreens
     )
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
 
