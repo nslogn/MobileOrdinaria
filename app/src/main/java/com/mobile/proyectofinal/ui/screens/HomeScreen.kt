@@ -76,26 +76,30 @@ fun HomeContent(
     viewModel: HomeNewsViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(innerPadding)
     ) {
-        items(news) { news ->
-            NewsItem(
-                news,
-                onFavouritesClick = {
-                    coroutineScope.launch {
-                        viewModel.insertFavouriteNew(news)
-                    }
-                })
+        items(news) { newsItem ->
+            @Suppress("SENSELESS_COMPARISON")
+            if (newsItem.title != null && newsItem.title != "[Removed]" && newsItem.urlToImage != null) {
+                NewsItem(
+                    newsItem,
+                    onFavouritesClick = {
+                        coroutineScope.launch {
+                            viewModel.insertFavouriteNew(newsItem)
+                        }
+                    })
+            }
         }
     }
 }
 
 @Composable
-fun NewsItem(news: News, onFavouritesClick: () -> Unit) {
+fun NewsItem(newsItem: News, onFavouritesClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
@@ -111,7 +115,7 @@ fun NewsItem(news: News, onFavouritesClick: () -> Unit) {
             contentAlignment = Alignment.BottomStart
         ) {
             AsyncImage(
-                model = news.urlToImage,
+                model = newsItem.urlToImage,
                 placeholder = painterResource(id = R.drawable.placeholder),
                 contentDescription = "new image URL",
                 modifier = Modifier
@@ -122,26 +126,29 @@ fun NewsItem(news: News, onFavouritesClick: () -> Unit) {
                     .fillMaxSize()
                     .background(color = Color.Black.copy(alpha = 0.8f))
             )
-            IconButton(
-                modifier = Modifier.align(Alignment.TopEnd),
-                onClick = onFavouritesClick
-            ) {
-                Icon(
-                    Icons.Filled.Favorite,
-                    contentDescription = "Favourites Icon",
-                    tint = Color.White
-                )
+            @Suppress("SENSELESS_COMPARISON")
+            if (newsItem.url != null && newsItem.urlToImage != null) {
+                IconButton(
+                    modifier = Modifier.align(Alignment.TopEnd),
+                    onClick = onFavouritesClick
+                ) {
+                    Icon(
+                        Icons.Filled.Favorite,
+                        contentDescription = "Favourites Icon",
+                        tint = Color.White
+                    )
+                }
             }
-            NewsTitle(news)
+            NewsTitle(newsItem)
         }
     }
 }
 
 @Composable
-fun NewsTitle(news: News) {
+fun NewsTitle(newsItem: News) {
     Text(
         maxLines = 3,
-        text = news.title,
+        text = newsItem.title,
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
@@ -196,7 +203,7 @@ fun TopBarWithMenu() {
 @Composable
 fun CardContentPreview() {
     NewsItem(
-        news = News(
+        newsItem = News(
             1, "Home", "Content", "yo", "no", "none"
         ),
         onFavouritesClick = {}

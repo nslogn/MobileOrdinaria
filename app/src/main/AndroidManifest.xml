@@ -29,7 +29,6 @@
         </activity>
     </application>
 
-    <!-- Add queries declaration -->
     <queries>
         <!-- Allow interaction with Gmail -->
         <package android:name="com.google.android.gm" />
