@@ -99,4 +99,6 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$roomVersion")
 
+    // Preference Data Store
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

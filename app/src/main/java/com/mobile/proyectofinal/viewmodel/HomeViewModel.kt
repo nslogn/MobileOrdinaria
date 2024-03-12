@@ -6,12 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobile.proyectofinal.data.NewsRepository
+import com.mobile.proyectofinal.data.SettingsDataStore
 import com.mobile.proyectofinal.data.enitty.News
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class HomeNewsViewModel(
-    private val repository: NewsRepository
+class HomeViewModel(
+    private val repository: NewsRepository,
+    private val settingsManager: SettingsDataStore
 ) : ViewModel() {
     private val _news = MutableLiveData<List<News>>()
 
@@ -21,6 +24,12 @@ class HomeNewsViewModel(
             _news.postValue(news)
         }
         return _news
+    }
+
+    val countryFlow: Flow<String> = settingsManager.countryFlow
+
+    suspend fun updateCountry(country: String) {
+        settingsManager.updateCountry(country)
     }
 
     suspend fun insertFavouriteNew(news: News) {

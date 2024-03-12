@@ -9,9 +9,17 @@ private const val API_KEY = "43d3747c579347069f2e1f953fe2183e"
 
 
 interface NewsApi {
-    @GET("top-headlines?apiKey=$API_KEY")
+    @GET("top-headlines")
     suspend fun getTopHeadLines(
         @Query("country") country: String,
-        @Query("pageSize") pageSize: Int
-        ): Response<NewsResponse>
+        @Query("pageSize") pageSize: Int,
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Response<NewsResponse>
+
+    @GET("v2/everything")
+    suspend fun searchNews(
+        @Query("q") searchQuery: String,
+        @Query("pageSize") pageNumber: Int,
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Response<NewsResponse>
 }

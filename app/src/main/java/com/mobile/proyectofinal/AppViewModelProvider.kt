@@ -4,18 +4,26 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.mobile.proyectofinal.viewmodel.FavouritesViewModel
-import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
+import com.mobile.proyectofinal.viewmodel.FavoritesViewModel
+import com.mobile.proyectofinal.viewmodel.HomeViewModel
+import com.mobile.proyectofinal.viewmodel.SearchViewModel
 
 object AppViewModelProvider {
 
     val Factory = viewModelFactory {
         initializer {
-            HomeNewsViewModel(NewsApplication().container.newsRepository)
+            HomeViewModel(
+                NewsApplication().container.newsRepository,
+                NewsApplication().container.settingDataStore
+            )
         }
 
         initializer {
-            FavouritesViewModel(NewsApplication().container.newsRepository)
+            FavoritesViewModel(NewsApplication().container.newsRepository)
+        }
+
+        initializer {
+            SearchViewModel(NewsApplication().container.newsRepository)
         }
 
     }

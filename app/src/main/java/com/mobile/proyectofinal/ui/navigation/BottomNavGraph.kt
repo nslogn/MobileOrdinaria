@@ -7,7 +7,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.mobile.proyectofinal.data.enitty.News
 import com.mobile.proyectofinal.ui.screens.FavouritesScreen
 import com.mobile.proyectofinal.ui.screens.HomeScreen
 import com.mobile.proyectofinal.ui.screens.NewsScreen
@@ -24,6 +23,7 @@ fun BottomNavGraph(navController: NavHostController) {
                 navController.navigate("${NavScreens.NewsScreens.route}/${Uri.encode(newsUrl)}")
             }
         }
+
         composable(route = NavScreens.FavouritesScreens.route) {
             FavouritesScreen()
         }

@@ -36,6 +36,7 @@ import androidx.compose.runtime.livedata.observeAsState
 
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.geometry.Offset
@@ -48,19 +49,21 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 import coil.compose.AsyncImage
 import com.mobile.proyectofinal.AppViewModelProvider
-import com.mobile.proyectofinal.viewmodel.HomeNewsViewModel
+import com.mobile.proyectofinal.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeNewsViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory),
     navigateToNews: (String) -> Unit
 ) {
+    val country by viewModel.countryFlow.collectAsState(initial = "US")
+    val newsList by viewModel.getNews(country, 20).observeAsState(initial = emptyList())
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBarWithMenu() },
+        topBar = { TopBarWithMenu(viewModel, country) },
     ) { innerPadding ->
-        val newsList by viewModel.getNews("US", 100).observeAsState(initial = emptyList())
         HomeContent(
             innerPadding,
             newsList,
@@ -74,7 +77,7 @@ fun HomeScreen(
 fun HomeContent(
     innerPadding: PaddingValues,
     news: List<News>,
-    viewModel: HomeNewsViewModel,
+    viewModel: HomeViewModel,
     navigateToNews: (String) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -86,8 +89,7 @@ fun HomeContent(
             .padding(innerPadding)
     ) {
         items(news) { newsItem ->
-            @Suppress("SENSELESS_COMPARISON")
-            if (newsItem.title != null && newsItem.title != "[Removed]" && newsItem.urlToImage != null) {
+            if (newsItem.title != "[Removed]") {
                 NewsItem(
                     newsItem,
                     onFavouritesClick = {
@@ -122,30 +124,29 @@ fun NewsItem(
                 .fillMaxWidth(),
             contentAlignment = Alignment.BottomStart
         ) {
-            AsyncImage(
-                model = newsItem.urlToImage,
-                placeholder = painterResource(id = R.drawable.placeholder),
-                contentDescription = "new image URL",
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
+            if (newsItem.urlToImage != null) {
+                AsyncImage(
+                    model = newsItem.urlToImage,
+                    placeholder = painterResource(id = R.drawable.placeholder),
+                    contentDescription = "new image URL",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(color = Color.Black.copy(alpha = 0.8f))
             )
-            @Suppress("SENSELESS_COMPARISON")
-            if (newsItem.url != null && newsItem.urlToImage != null) {
-                IconButton(
-                    modifier = Modifier.align(Alignment.TopEnd),
-                    onClick = onFavouritesClick
-                ) {
-                    Icon(
-                        Icons.Filled.Favorite,
-                        contentDescription = "Favourites Icon",
-                        tint = Color.White
-                    )
-                }
+            IconButton(
+                modifier = Modifier.align(Alignment.TopEnd),
+                onClick = onFavouritesClick
+            ) {
+                Icon(
+                    Icons.Filled.Favorite,
+                    contentDescription = "Favourites Icon",
+                    tint = Color.White
+                )
             }
             NewsTitle(newsItem)
         }
@@ -177,7 +178,12 @@ fun NewsTitle(newsItem: News) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarWithMenu() {
+fun TopBarWithMenu(
+    viewModel: HomeViewModel,
+    country: String
+) {
+    val scope = rememberCoroutineScope()
+
     CenterAlignedTopAppBar(
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -199,9 +205,14 @@ fun TopBarWithMenu() {
         },
         actions = {
             IconButton(
-                onClick = { /* do something */ }
+                onClick = {
+                    scope.launch {
+                        val newCountry = if (country == "US") "AR" else "US"
+                        viewModel.updateCountry(newCountry)
+                    }
+                }
             ) {
-                Icon(Icons.Filled.Settings, contentDescription = "Localized description")
+                Icon(Icons.Filled.Settings, contentDescription = "Change Country Preferences")
             }
         }
     )

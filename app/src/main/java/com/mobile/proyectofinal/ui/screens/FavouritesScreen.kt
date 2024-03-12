@@ -32,11 +32,11 @@ import coil.compose.AsyncImage
 import com.mobile.proyectofinal.R
 import com.mobile.proyectofinal.data.enitty.News
 import com.mobile.proyectofinal.AppViewModelProvider
-import com.mobile.proyectofinal.viewmodel.FavouritesViewModel
+import com.mobile.proyectofinal.viewmodel.FavoritesViewModel
 
 @Composable
 fun FavouritesScreen(
-    viewModel: FavouritesViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: FavoritesViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
