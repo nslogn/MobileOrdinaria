@@ -59,7 +59,6 @@ fun HomeScreen(
 ) {
     val country by viewModel.countryFlow.collectAsState(initial = "US")
     val newsList by viewModel.getNews(country, 20).observeAsState(initial = emptyList())
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { TopBarWithMenu(viewModel, country) },
