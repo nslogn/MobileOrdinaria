@@ -10,7 +10,7 @@ import com.mobile.proyectofinal.data.enitty.News
 
 @Database(
     entities = [News::class],
-    version = 2,
+    version = 3,
     exportSchema = false, //so as not to keep schema version history backups
 )
 abstract class NewsDatabase : RoomDatabase() {
@@ -37,10 +37,27 @@ abstract class NewsDatabase : RoomDatabase() {
                     )
                 }
             }
+            val MIGRATION_1_3 = object : Migration(2, 3) {
+                override fun migrate(db: SupportSQLiteDatabase) {
+                    db.execSQL("DROP TABLE IF EXISTS 'news'")
+                    db.execSQL(
+                        "CREATE TABLE IF NOT EXISTS `news` (" +
+                                "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                                "`title` TEXT NOT NULL, " +
+                                "`content` TEXT, " +
+                                "`author` TEXT, " +
+                                "`url` TEXT NOT NULL, " +
+                                "`urlToImage` TEXT, " +
+                                "`isRead` INTEGER NOT NULL DEFAULT 0," +
+                                "'isFavorite' INTEGER NOT NULL DEFAULT 0)"
+                    )
+                }
+            }
 
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, NewsDatabase::class.java, "news_database")
                     .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_3)
                     .build()
                     .also { Instance = it }
             }

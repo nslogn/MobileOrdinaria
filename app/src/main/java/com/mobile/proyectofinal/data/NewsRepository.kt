@@ -9,25 +9,29 @@ import kotlinx.coroutines.flow.Flow
 class NewsRepository(
     private val newsDao: NewsDao
 ) {
-    private var news: List<News> = emptyList()
-
     suspend fun getNews(country: String, pageSize: Int): List<News> {
         val apiResponse = RetrofitInstance.newsApiService.getTopHeadLines(country, pageSize).body()
         checkApiResponse(apiResponse)
-        news = apiResponse?.articles ?: emptyList()
-        return news
+        return apiResponse?.articles ?: emptyList()
     }
 
     suspend fun searchNews(searchQuery: String, pageNumber: Int): List<News> {
         val apiResponse = RetrofitInstance.newsApiService.searchNews(searchQuery, pageNumber).body()
         checkApiResponse(apiResponse)
-        news = apiResponse?.articles ?: emptyList()
-        return news
+        return apiResponse?.articles ?: emptyList()
     }
 
-    suspend fun insertFavouriteNew(new: News) = newsDao.insert(new)
+    suspend fun getNewsByTitle(title: String) = newsDao.getNewsByTitle(title)
 
-    fun getFavouriteNews(): Flow<List<News>> = newsDao.getNews()
+    suspend fun deleteNews(news: News) = newsDao.delete(news)
+
+    suspend fun insertFavouriteNew(news: News) = newsDao.insert(news)
+
+    suspend fun updateNews(news: News) = newsDao.update(news)
+
+    fun getFavouriteNews(): Flow<List<News>> = newsDao.getFavoriteNews()
+
+    fun getReadNews(): Flow<List<News>> = newsDao.getNewsRead()
 
     private fun checkApiResponse(apiResponse: NewsResponse?) {
         if (apiResponse?.status == "error") {

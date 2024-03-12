@@ -1,10 +1,10 @@
 package com.mobile.proyectofinal.ui.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class NavScreens(
@@ -24,15 +24,15 @@ sealed class NavScreens(
         icon = Icons.Default.Person
     )
 
-    data object SearchScreens : NavScreens(
-        route = "search",
-        title = "Search",
-        icon = Icons.Default.Settings
+    data object ReadScreens : NavScreens(
+        route = "read",
+        title = "Read",
+        icon = Icons.Default.CheckCircle
     )
 
     data object FavouritesScreens : NavScreens(
-        route = "favourites",
-        title = "Favourites",
+        route = "favorites",
+        title = "Favorites",
         icon = Icons.Default.Favorite
     )
 }

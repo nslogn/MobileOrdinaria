@@ -10,9 +10,9 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_2_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal"
         android:usesCleartextTraffic="true"
@@ -36,7 +36,5 @@
         <package android:name="com.microsoft.office.outlook" />
         <!-- Allow interaction with the default Email app -->
         <package android:name="com.android.email" />
-
     </queries>
-
 </manifest>

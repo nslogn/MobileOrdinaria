@@ -12,5 +12,6 @@ data class News(
     var author: String?,
     var url: String,
     var urlToImage: String?,
-    var isRead: Boolean = false
+    var isRead: Boolean = false,
+    var isFavorite: Boolean = false
 )

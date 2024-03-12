@@ -6,6 +6,9 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,13 +29,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.mobile.proyectofinal.R
 import com.mobile.proyectofinal.data.enitty.News
 import com.mobile.proyectofinal.AppViewModelProvider
 import com.mobile.proyectofinal.viewmodel.FavoritesViewModel
+import kotlinx.coroutines.launch
+
 
 @Composable
 fun FavouritesScreen(
@@ -50,35 +57,73 @@ fun FavouritesScreen(
         },
     ) { innerPadding ->
         val favouriteNews by viewModel.favouritesNews.collectAsState(initial = emptyList())
-        FavouritesContent(innerPadding, favouriteNews)
+        val context = LocalContext.current
+        NewsContent(
+            innerPadding = innerPadding,
+            favouriteNews = favouriteNews,
+            onDeleteNews = { newsItem ->
+                viewModel.viewModelScope.launch {
+                    viewModel.deleteNews(newsItem)
+                }
+            },
+            onComposeEmail = { newsItem ->
+                composeEmail(context, newsItem.title, newsItem.url)
+            }
+        )
     }
 }
 
+
 @Composable
-fun FavouritesContent(innerPadding: PaddingValues, favouriteNews: List<News>) {
+fun NewsContent(
+    innerPadding: PaddingValues,
+    favouriteNews: List<News>,
+    onDeleteNews: (News) -> Unit,
+    onComposeEmail: (News) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(innerPadding)
     ) {
-        items(favouriteNews) { news ->
-            FavouritesNewsItem(news)
+        items(favouriteNews) { newsItem ->
+            NewsItemCommon(
+                newsItem,
+                onDrag = {
+                    onDeleteNews(newsItem)
+                },
+                onClick = {
+                    onComposeEmail(newsItem)
+                },
+                threshold = 60.dp
+            )
         }
     }
 }
 
 @Composable
-fun FavouritesNewsItem(news: News) {
-    val context = LocalContext.current
-
+fun NewsItemCommon(
+    news: News,
+    onDrag: (News) -> Unit,
+    onClick: () -> Unit,
+    threshold: Dp,
+) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
+            .draggable(
+                orientation = Orientation.Horizontal,
+                state = rememberDraggableState { delta ->
+                    if (delta > threshold.value) {
+                        onDrag(news)
+                    }
+                }
+            )
             .clickable {
-                composeEmail(context, news.title, news.url)
+                onClick()
             },
     ) {
         Box(
@@ -101,6 +146,7 @@ fun FavouritesNewsItem(news: News) {
             NewsTitle(news)
         }
     }
+
 }
 
 fun composeEmail(context: Context, subject: String, url: String) {

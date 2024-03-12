@@ -26,6 +26,14 @@ class HomeViewModel(
         return _news
     }
 
+    suspend fun updateNew(news: News) {
+        repository.updateNews(news)
+    }
+
+    suspend fun getNewsByTitle(title: String): News? {
+        return repository.getNewsByTitle(title)
+    }
+
     val countryFlow: Flow<String> = settingsManager.countryFlow
 
     suspend fun updateCountry(country: String) {

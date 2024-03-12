@@ -10,7 +10,7 @@ import androidx.navigation.navArgument
 import com.mobile.proyectofinal.ui.screens.FavouritesScreen
 import com.mobile.proyectofinal.ui.screens.HomeScreen
 import com.mobile.proyectofinal.ui.screens.NewsScreen
-import com.mobile.proyectofinal.ui.screens.SearchScreen
+import com.mobile.proyectofinal.ui.screens.ReadNewsScreen
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -27,6 +27,7 @@ fun BottomNavGraph(navController: NavHostController) {
         composable(route = NavScreens.FavouritesScreens.route) {
             FavouritesScreen()
         }
+
         composable(
             route = "${NavScreens.NewsScreens.route}/{newsUrl}",
             arguments = listOf(navArgument("newsUrl") {
@@ -36,8 +37,9 @@ fun BottomNavGraph(navController: NavHostController) {
             val newsUrl = backStackEntry.arguments?.getString("newsUrl")
             NewsScreen(newsUrl = newsUrl)
         }
-        composable(route = NavScreens.SearchScreens.route) {
-            SearchScreen()
+
+        composable(route = NavScreens.ReadScreens.route) {
+            ReadNewsScreen()
         }
     }
 }

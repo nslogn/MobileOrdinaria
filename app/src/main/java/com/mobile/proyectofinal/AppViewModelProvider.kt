@@ -6,7 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.mobile.proyectofinal.viewmodel.FavoritesViewModel
 import com.mobile.proyectofinal.viewmodel.HomeViewModel
-import com.mobile.proyectofinal.viewmodel.SearchViewModel
+import com.mobile.proyectofinal.viewmodel.ReadViewModel
 
 object AppViewModelProvider {
 
@@ -23,7 +23,7 @@ object AppViewModelProvider {
         }
 
         initializer {
-            SearchViewModel(NewsApplication().container.newsRepository)
+            ReadViewModel(NewsApplication().container.newsRepository)
         }
 
     }

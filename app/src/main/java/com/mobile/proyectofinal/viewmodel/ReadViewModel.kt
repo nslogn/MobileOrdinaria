@@ -5,12 +5,12 @@ import com.mobile.proyectofinal.data.NewsRepository
 import com.mobile.proyectofinal.data.enitty.News
 import kotlinx.coroutines.flow.Flow
 
-class FavoritesViewModel(
+class ReadViewModel(
     private val repository: NewsRepository
 ) : ViewModel() {
-    val favouritesNews: Flow<List<News>> = repository.getFavouriteNews()
+    val readNews: Flow<List<News>> = repository.getReadNews()
 
-    suspend fun deleteNews(news: News){
+    suspend fun deleteNews(news: News) {
         repository.deleteNews(news)
     }
 }

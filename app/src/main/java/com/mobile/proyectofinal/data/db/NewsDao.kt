@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(news: News)
 
     @Update
@@ -22,4 +22,13 @@ interface NewsDao {
 
     @Query("SELECT * FROM news")
     fun getNews(): Flow<List<News>>
+
+    @Query("SELECT * FROM news  WHERE isRead = 1")
+    fun getNewsRead(): Flow<List<News>>
+
+    @Query("SELECT * FROM news  WHERE isFavorite = 1")
+    fun getFavoriteNews(): Flow<List<News>>
+
+    @Query("SELECT * FROM news WHERE title = :title")
+    suspend fun getNewsByTitle(title: String): News?
 }

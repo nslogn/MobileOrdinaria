@@ -59,9 +59,22 @@ fun HomeScreen(
 ) {
     val country by viewModel.countryFlow.collectAsState(initial = "US")
     val newsList by viewModel.getNews(country, 20).observeAsState(initial = emptyList())
+    val scope = rememberCoroutineScope()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBarWithMenu(viewModel, country) },
+        topBar = {
+            TopBarWithMenu(
+                onNavigationClick = {
+
+                },
+                onActionClick = {
+                    scope.launch {
+                        val newCountry = if (country == "US") "AR" else "US"
+                        viewModel.updateCountry(newCountry)
+                    }
+                }
+            )
+        },
     ) { innerPadding ->
         HomeContent(
             innerPadding,
@@ -91,8 +104,18 @@ fun HomeContent(
             if (newsItem.title != "[Removed]") {
                 NewsItem(
                     newsItem,
+                    onCardClick = {
+                        coroutineScope.launch {
+                            val existingNews = viewModel.getNewsByTitle(newsItem.title)
+                            if (existingNews != null) {
+                                existingNews.isRead = true
+                                viewModel.updateNew(existingNews)
+                            }
+                        }
+                    },
                     onFavouritesClick = {
                         coroutineScope.launch {
+                            newsItem.isFavorite = true
                             viewModel.insertFavouriteNew(newsItem)
                         }
                     },
@@ -106,6 +129,7 @@ fun HomeContent(
 @Composable
 fun NewsItem(
     newsItem: News,
+    onCardClick: () -> Unit,
     onFavouritesClick: () -> Unit,
     navigateToNews: (String) -> Unit
 ) {
@@ -115,6 +139,7 @@ fun NewsItem(
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
+                onCardClick()
                 navigateToNews(newsItem.url)
             },
     ) {
@@ -178,11 +203,9 @@ fun NewsTitle(newsItem: News) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBarWithMenu(
-    viewModel: HomeViewModel,
-    country: String
+    onNavigationClick: () -> Unit,
+    onActionClick: () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
-
     CenterAlignedTopAppBar(
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -197,19 +220,14 @@ fun TopBarWithMenu(
         },
         navigationIcon = {
             IconButton(
-                onClick = { /* do something */ }
+                onClick = onNavigationClick
             ) {
                 Icon(Icons.Filled.Menu, contentDescription = "Localized description")
             }
         },
         actions = {
             IconButton(
-                onClick = {
-                    scope.launch {
-                        val newCountry = if (country == "US") "AR" else "US"
-                        viewModel.updateCountry(newCountry)
-                    }
-                }
+                onClick = onActionClick
             ) {
                 Icon(Icons.Filled.Settings, contentDescription = "Change Country Preferences")
             }
@@ -224,6 +242,7 @@ fun CardContentPreview() {
         newsItem = News(
             1, "Home", "Content", "yo", "no", "none"
         ),
+        onCardClick = {},
         onFavouritesClick = {},
         navigateToNews = {}
     )

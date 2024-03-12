@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.mobile.proyectofinal.R
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SetJavaScriptEnabled")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun NewsScreen(newsUrl: String?) {
     Scaffold(
@@ -37,7 +37,7 @@ fun NewsScreen(newsUrl: String?) {
         AndroidView(
             factory = { context ->
                 WebView(context).apply {
-                    settings.javaScriptEnabled = true
+                    //settings.javaScriptEnabled = true
                     webViewClient = WebViewClient()
 
                     settings.loadWithOverviewMode = true

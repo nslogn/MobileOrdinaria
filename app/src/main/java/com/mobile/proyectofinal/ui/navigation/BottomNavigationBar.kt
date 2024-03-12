@@ -16,7 +16,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     val screens = listOf(
         NavScreens.HomeScreens,
         NavScreens.FavouritesScreens,
-        NavScreens.SearchScreens,
+        NavScreens.ReadScreens,
     )
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
 
